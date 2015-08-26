@@ -1,5 +1,9 @@
-'use strict';
+(function() {
+	'use strict';
 
-function Hello() {
-	console.log('hello');
-}
+	function main() {
+		console.log('main');
+	}
+
+	main();
+})();

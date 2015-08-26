@@ -9,7 +9,8 @@ var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var concat = require('gulp-concat');
 
-var paths = require('./gulp.config');
+// project-specific config for gulp
+var paths = require('./gulp-config');
 
 gulp.task('sass', function() {
 	return gulp.src(paths.css.src)
@@ -20,7 +21,7 @@ gulp.task('sass', function() {
 
 gulp.task('lib', function() {
 	return gulp.src(paths.lib.src)
-		.pipe(concat('lib.js'))
+		.pipe(concat(paths.lib.fileName))
 		.pipe(gulp.dest(paths.lib.dest));
 });
 
@@ -33,6 +34,11 @@ gulp.task('js', function() {
 			})
 		.pipe(jshint('.jshintrc'))
 		.pipe(jshint.reporter('jshint-stylish'))
-		.pipe(concat('main.js'))
+		.pipe(concat(paths.js.fileName))
 		.pipe(gulp.dest(paths.js.dest));
+});
+
+gulp.task('default', ['lib', 'js', 'sass'], function() {
+	gulp.watch(paths.css.src, ['sass']);
+	gulp.watch(paths.js.src, ['js']);
 });

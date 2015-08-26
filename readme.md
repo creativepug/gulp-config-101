@@ -1,3 +1,9 @@
 # gulp-config-101
 
-keeping project specific configurations out of `gulpfile.js`
+Demo - keeping project-specific configurations out of `gulpfile.js` so we can share `gulpfile.js` across projects that have similar tasks.
+
+```sh
+$ npm install
+$ bower install
+$ gulp
+```
