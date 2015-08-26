@@ -9,24 +9,19 @@ var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var concat = require('gulp-concat');
 
-var paths = {
-	css: {
-		src: ['./sass/**/*.scss'],
-		dest: './dist/css'
-	},
-	js: {
-		src: [
-			'./js/main.js'
-		],
-		dest: './dist/js'
-	}
-};
+var paths = require('./gulp.config');
 
 gulp.task('sass', function() {
 	return gulp.src(paths.css.src)
 		.pipe(sass().on('error', sass.logError))
 		.pipe(prefix())
 		.pipe(gulp.dest(paths.css.dest));
+});
+
+gulp.task('lib', function() {
+	return gulp.src(paths.lib.src)
+		.pipe(concat('lib.js'))
+		.pipe(gulp.dest(paths.lib.dest));
 });
 
 gulp.task('js', function() {
