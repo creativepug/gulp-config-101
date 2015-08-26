@@ -12,6 +12,8 @@ var concat = require('gulp-concat');
 // project-specific config for gulp
 var paths = require('./gulp-config');
 
+// compile sass
+// add vendor prefixes
 gulp.task('sass', function() {
 	return gulp.src(paths.css.src)
 		.pipe(sass().on('error', sass.logError))
@@ -19,12 +21,16 @@ gulp.task('sass', function() {
 		.pipe(gulp.dest(paths.css.dest));
 });
 
+// concatenate all plugins
 gulp.task('lib', function() {
 	return gulp.src(paths.lib.src)
 		.pipe(concat(paths.lib.fileName))
 		.pipe(gulp.dest(paths.lib.dest));
 });
 
+// check code style guide
+// run jshint
+// concatenate into a single file
 gulp.task('js', function() {
 	return gulp.src(paths.js.src)
 		.pipe(jscs())
@@ -38,6 +44,7 @@ gulp.task('js', function() {
 		.pipe(gulp.dest(paths.js.dest));
 });
 
+// run all the tasks and start watchers
 gulp.task('default', ['lib', 'js', 'sass'], function() {
 	gulp.watch(paths.css.src, ['sass']);
 	gulp.watch(paths.js.src, ['js']);
